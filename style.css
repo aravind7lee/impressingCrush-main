@@ -138,8 +138,22 @@ p {
     /* Decrease padding for medium devices */
   }
 
+  .paper.imagee {
+    padding: 2px;
+    width: 210px;
+    margin-bottom: 80px;
+  
+  /* Minimal padding for very small devices */
+  }
+
+  .paper.imagee p {
+    font-size: 23px; /* Decrease font size for better readability */
+  }
+
+
+
   .paper.image p {
-    font-size: 26px; /* Decrease font size for better readability */
+    font-size: 23px; /* Decrease font size for better readability */
   }
 
   .paper.heart {
@@ -177,9 +191,13 @@ p {
   /* Minimal padding for very small devices */
   }
 
+  .paper.imagee p {
+    font-size: 23px; /* Decrease font size for better readability */
+  }
+
 
   .paper.image p {
-    font-size: 24px; /* Decrease font size further */
+    font-size: 23px; /* Decrease font size further */
   }
 
   .paper.heart {
