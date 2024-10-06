@@ -53,9 +53,6 @@ body {
   font-size: 30px;
 }
 
-.paper image2 {
-  padding: 50px;
-}
 
 img {
   max-height: 200px;
@@ -135,18 +132,6 @@ p {
     /* Decrease padding for medium devices */
   }
 
-  .paper.imagee {
-    padding: 2px;
-    width: 210px;
-    margin-bottom: 80px;
-  
-  /* Minimal padding for very small devices */
-  }
-
-  .paper.imagee p {
-    font-size: 23px; /* Decrease font size for better readability */
-  }
-
 
 
   .paper.image p {
@@ -174,25 +159,13 @@ p {
   .paper p {
     font-size: 20px; /* Further decrease font size for mobile */
   }
-  
+
   .paper.image {
     padding: 2px;
     width: 220px;
     margin-bottom: 80px;
   
   /* Minimal padding for very small devices */
-  }
-
-  .paper.imagee {
-    padding: 2px;
-    width: 210px;
-    margin-bottom: 80px;
-  
-  /* Minimal padding for very small devices */
-  }
-
-  .paper.imagee p {
-    font-size: 23px; /* Decrease font size for better readability */
   }
 
 
