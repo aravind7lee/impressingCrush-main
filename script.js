@@ -16,61 +16,80 @@ class Paper {
   rotating = false;
 
   init(paper) {
-    document.addEventListener('mousemove', (e) => {
-      if(!this.rotating) {
-        this.mouseX = e.clientX;
-        this.mouseY = e.clientY;
-        
-        this.velX = this.mouseX - this.prevMouseX;
-        this.velY = this.mouseY - this.prevMouseY;
-      }
-        
-      const dirX = e.clientX - this.mouseTouchX;
-      const dirY = e.clientY - this.mouseTouchY;
-      const dirLength = Math.sqrt(dirX*dirX+dirY*dirY);
-      const dirNormalizedX = dirX / dirLength;
-      const dirNormalizedY = dirY / dirLength;
+    // Mouse Events
+    document.addEventListener('mousemove', (e) => this.handleMove(e));
+    paper.addEventListener('mousedown', (e) => this.handleDown(e));
+    window.addEventListener('mouseup', () => this.handleUp());
 
-      const angle = Math.atan2(dirNormalizedY, dirNormalizedX);
-      let degrees = 180 * angle / Math.PI;
-      degrees = (360 + Math.round(degrees)) % 360;
-      if(this.rotating) {
-        this.rotation = degrees;
-      }
+    // Touch Events
+    document.addEventListener('touchmove', (e) => this.handleMove(e));
+    paper.addEventListener('touchstart', (e) => this.handleDown(e));
+    window.addEventListener('touchend', () => this.handleUp());
+  }
 
-      if(this.holdingPaper) {
-        if(!this.rotating) {
-          this.currentPaperX += this.velX;
-          this.currentPaperY += this.velY;
-        }
-        this.prevMouseX = this.mouseX;
-        this.prevMouseY = this.mouseY;
+  handleMove(e) {
+    // Get correct event type
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
 
-        paper.style.transform = `translateX(${this.currentPaperX}px) translateY(${this.currentPaperY}px) rotateZ(${this.rotation}deg)`;
-      }
-    })
-
-    paper.addEventListener('mousedown', (e) => {
-      if(this.holdingPaper) return; 
-      this.holdingPaper = true;
+    if (!this.rotating) {
+      this.mouseX = clientX;
+      this.mouseY = clientY;
       
-      paper.style.zIndex = highestZ;
-      highestZ += 1;
-      
-      if(e.button === 0) {
-        this.mouseTouchX = this.mouseX;
-        this.mouseTouchY = this.mouseY;
-        this.prevMouseX = this.mouseX;
-        this.prevMouseY = this.mouseY;
+      this.velX = this.mouseX - this.prevMouseX;
+      this.velY = this.mouseY - this.prevMouseY;
+    }
+    
+    const dirX = clientX - this.mouseTouchX;
+    const dirY = clientY - this.mouseTouchY;
+    const dirLength = Math.sqrt(dirX * dirX + dirY * dirY);
+    const dirNormalizedX = dirX / dirLength;
+    const dirNormalizedY = dirY / dirLength;
+
+    const angle = Math.atan2(dirNormalizedY, dirNormalizedX);
+    let degrees = 180 * angle / Math.PI;
+    degrees = (360 + Math.round(degrees)) % 360;
+
+    if (this.rotating) {
+      this.rotation = degrees;
+    }
+
+    if (this.holdingPaper) {
+      if (!this.rotating) {
+        this.currentPaperX += this.velX;
+        this.currentPaperY += this.velY;
       }
-      if(e.button === 2) {
-        this.rotating = true;
-      }
-    });
-    window.addEventListener('mouseup', () => {
-      this.holdingPaper = false;
-      this.rotating = false;
-    });
+      this.prevMouseX = this.mouseX;
+      this.prevMouseY = this.mouseY;
+
+      paper.style.transform = `translateX(${this.currentPaperX}px) translateY(${this.currentPaperY}px) rotateZ(${this.rotation}deg)`;
+    }
+  }
+
+  handleDown(e) {
+    if (this.holdingPaper) return;
+    this.holdingPaper = true;
+
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+    paper.style.zIndex = highestZ;
+    highestZ += 1;
+
+    if (e.type === 'mousedown' || (e.touches && e.touches.length === 1)) {
+      this.mouseTouchX = clientX;
+      this.mouseTouchY = clientY;
+      this.prevMouseX = clientX;
+      this.prevMouseY = clientY;
+    }
+    if (e.button === 2 || (e.touches && e.touches.length > 1)) {
+      this.rotating = true;
+    }
+  }
+
+  handleUp() {
+    this.holdingPaper = false;
+    this.rotating = false;
   }
 }
 
