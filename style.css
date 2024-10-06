@@ -22,7 +22,7 @@ body {
   
   transform: rotateZ(-5deg);
   box-shadow: 1px 15px 20px 0px rgba(0,0,0,0.5);
-  
+  touch-action: none; /* Prevent default touch actions */
   position: absolute;
 }
 
@@ -116,18 +116,15 @@ p {
   }
 
   .paper {
-    padding: 20px; /* Adjust padding */
-    background-size: cover; /* Keep responsive */
-    width: 90%; /* Make paper fill available space */
-    left: 50%; /* Center the paper */
-    transform: translateX(-50%) rotateZ(-5deg);
-    margin-top: 490px;
-    width: 180px;
-    height: 290px; /* Center and rotate */
+    width: 90%; /* Use 90% width for smaller screens */
+    padding: 15px 20px; /* Adjust padding */
+    background-size: cover; /* Make background responsive */
+    margin: 10px auto; /* Center align papers and provide margin */
+    box-shadow: 1px 10px 15px rgba(0, 0, 0, 0.4); /* Slightly less shadow for smaller screens */
   }
 
   .paper p {
-    font-size: 30px; 
+    font-size: 24px; /* Decrease font size for better readability */
   }
 
   .paper.image {
@@ -168,13 +165,16 @@ p {
 
 @media (max-width: 480px) {
   .paper {
-    padding: 10px;
-    width: 200px;
-    height: 300px;
-    margin-top: 450px;
-    /* Further reduce padding */
+    width: 95%; /* Use 95% width for mobile screens */
+    padding: 10px; /* Further adjust padding */
+    background-size: cover; /* Ensure the background image covers the element */
+    margin: 5px auto; /* Center align papers and provide margin */
   }
 
+  .paper p {
+    font-size: 20px; /* Further decrease font size for mobile */
+  }
+  
   .paper.image {
     padding: 2px;
     width: 220px;
