@@ -1,8 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Zeyada&display=swap');
 
-
-
-
 body {
   height: 100vh;
   display: flex;
@@ -11,6 +8,7 @@ body {
   background-size: 1000px;
   background-image: url("https://www.psdgraphics.com/wp-content/uploads/2022/01/white-math-paper-texture.jpg");
   background-position: center center;
+  overflow: hidden; /* Prevent overflow */
 }
 
 .paper {
@@ -18,10 +16,9 @@ body {
   background-size: 500px;
   background-position: center center;
   padding: 20px 100px;
-/*  min-width: 800px; */
   
   transform: rotateZ(-5deg);
-  box-shadow: 1px 15px 20px 0px rgba(0,0,0,0.5);
+  box-shadow: 1px 15px 20px 0px rgba(0, 0, 0, 0.5);
   touch-action: none; /* Prevent default touch actions */
   position: absolute;
 }
@@ -53,10 +50,10 @@ body {
   font-size: 30px;
 }
 
-
 img {
-  max-height: 200px;
+  max-height: 150px; /* Adjust max height for images */
   width: 100%;
+  object-fit: contain; /* Ensure images fit without stretching */
   user-select: none;
 }
 
@@ -81,8 +78,6 @@ p {
   color: rgb(0,0,100);
   opacity: 0.75;
   user-select: none;
-  
-  // filter: drop-shadow(2px 1.5px 1px rgba(0,0,105,0.9));
 }
 
 .floating-hearts {
@@ -105,7 +100,6 @@ p {
   }
 }
 
-
 @media (max-width: 768px) {
   body {
     height: auto; /* Allow body to grow */
@@ -126,13 +120,9 @@ p {
 
   .paper.image {
     padding: 5px;
-    width: 200px;
-    margin-bottom:80px;
-  
-    /* Decrease padding for medium devices */
+    width: 80%; /* Use a relative width */
+    margin-bottom: 20px; /* Adjust spacing */
   }
-
-
 
   .paper.image p {
     font-size: 23px; /* Decrease font size for better readability */
@@ -142,7 +132,7 @@ p {
     margin-top: 50px;
     width: 150px; /* Adjust heart size */
     height: 130px;
-    margin-top:1100px;
+    margin-top: 1100px;
     margin-right: 90%;
     transform: translateX(50%); /* Center horizontally */
   }
@@ -162,15 +152,12 @@ p {
 
   .paper.image {
     padding: 2px;
-    width: 220px;
-    margin-bottom: 80px;
-  
-  /* Minimal padding for very small devices */
+    width: 100%; /* Use full width for mobile */
+    margin-bottom: 20px; /* Reduce bottom margin */
   }
 
-
   .paper.image p {
-    font-size: 23px; /* Decrease font size further */
+    font-size: 18px; /* Decrease font size further */
   }
 
   .paper.heart {
